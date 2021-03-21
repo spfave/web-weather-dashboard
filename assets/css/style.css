@@ -1,0 +1,25 @@
+/* Tags */
+h1,
+h3,
+h4 {
+  font-weight: bold;
+  margin: 0;
+}
+
+@media screen and (max-width: 576px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+}
+
+section {
+  padding: 10px;
+}
