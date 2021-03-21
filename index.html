@@ -10,8 +10,9 @@
   <title>Travel Weather Dashboard</title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-  <!-- Style Imports: Bootstrap -->
+  <!-- Style Imports: Bootstrap Flatly Theme, Bootstrap Icons -->
   <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
 
@@ -22,13 +23,33 @@
 <body>
   <!-- Header -->
   <header class="bg-primary p-2">
-    <h1 class="h1-small text-center text-light text-">Weather Dashboard</h1>
+    <h1 class="text-center text-light text-">Weather Dashboard</h1>
   </header>
 
   <main>
     <!-- Search -->
-    <section class="bg-light">
-      <h4>Search for a City:</h4>
+    <section class="sec-search bg-light">
+      <form id="search-city">
+        <div class="form-group">
+          <label for="inputCity">
+            <h4 class="p-0">See Forecast for</h4>
+          </label>
+          <div class="input-group">
+            <input id="inputCity" class="form-control" type="text" placeholder="Enter City Name">
+            <div class="input-group-append">
+              <button id="btn-search" class="btn btn-info" type="button"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <h4>Previous Searches</h4>
+      <ul id="saved-cities" class="list-group">
+        <!-- List of searched cities created here -->
+        <!-- Note use .active to highlight selection -->
+        <li class="list-group-item list-group-item-action">City 1</li>
+        <li class="list-group-item list-group-item-action">City 2</li>
+      </ul>
     </section>
 
 
