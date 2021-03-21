@@ -5,8 +5,15 @@
 /* Tags */
 h1,
 h3,
-h4 {
+h4,
+h5 {
   font-weight: bold;
+}
+
+h1,
+h3,
+h4,
+p {
   margin: 0;
 }
 
@@ -35,4 +42,9 @@ section {
 
 .sec-search .list-group-item {
   padding: 0.5rem;
+}
+
+/* Forecast Sections */
+.card-body p {
+  margin-bottom: 0.5rem;
 }
