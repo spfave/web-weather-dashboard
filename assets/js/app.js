@@ -1,11 +1,18 @@
 // DOM SELECTORS
+inputCityEl = document.querySelector("#input-city");
+btnSearch = document.querySelector("#btn-search");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
 
 // FUNCTIONS
+// Handle getting city weather
+const getCityWeather = (city) => {
+  console.log(city);
+};
+
 // Evaluate latitude and longitude of city name
-http: const geocodeCity = () => {
+const geocodeCity = () => {
   // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
   let geocodeURL = "http://api.openweathermap.org/geo/1.0/direct?";
 };
@@ -35,12 +42,20 @@ const displayCityName = () => {};
 const loadCityNames = () => {};
 
 // Handle city search from form entry
-const handleCitySearch = () => {};
+const handleCitySearch = () => {
+  const inputCity = inputCityEl.value;
+
+  // if non-empty string search for city lat & long
+  if (inputCity) {
+    getCityWeather(inputCity);
+  }
+};
 
 // Handle city search from list of saved cities
 const handleSavedCitySearch = () => {};
 
 // EVENT LISTENERS
 // Text entry search
+btnSearch.addEventListener("click", handleCitySearch);
 
 // Saved city search
