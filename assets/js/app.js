@@ -1,6 +1,7 @@
 // DOM SELECTORS
 inputCityEl = document.querySelector("#input-city");
 btnSearch = document.querySelector("#btn-search");
+savedCitiesEl = document.querySelector("#saved-cities");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -43,19 +44,27 @@ const loadCityNames = () => {};
 
 // Handle city search from form entry
 const handleCitySearch = () => {
-  const inputCity = inputCityEl.value;
+  // Get input city name
+  const inputCity = inputCityEl.value.toLowerCase();
 
-  // if non-empty string search for city lat & long
+  // if non-empty string - get city weather
   if (inputCity) {
     getCityWeather(inputCity);
   }
 };
 
 // Handle city search from list of saved cities
-const handleSavedCitySearch = () => {};
+const handleSavedCitySearch = (event) => {
+  // Get selected city name
+  const selectCity = event.target.textContent.toLowerCase();
+
+  // Get city weather
+  getCityWeather(selectCity);
+};
 
 // EVENT LISTENERS
 // Text entry search
 btnSearch.addEventListener("click", handleCitySearch);
 
 // Saved city search
+savedCitiesEl.addEventListener("click", handleSavedCitySearch);
