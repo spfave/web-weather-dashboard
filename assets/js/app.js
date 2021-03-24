@@ -8,15 +8,24 @@ const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
 
 // FUNCTIONS
 // Handle getting city weather
-const getCityWeather = async (city) => {
+const handleCityWeatherRequest = async (city) => {
+  let cityWeather;
+
+  //
   try {
     // Get City lat & long
     const cityLatLon = await geocodeCity(city);
-    const cityWeather = await getWeatherData(cityLatLon);
-    console.log(cityWeather);
+    // Get City weather data
+    cityWeather = await getWeatherData(cityLatLon);
   } catch (error) {
     console.warn(error);
+    return;
   }
+
+  // Display weather results
+  // console.log(cityWeather);
+  displayForecastCurrent(city, cityWeather.current);
+  displayForecast5Day(cityWeather.daily);
 };
 
 // Evaluate latitude and longitude of city name
@@ -47,11 +56,10 @@ const geocodeCity = async (city) => {
 
 // Perform openweather API call
 const getWeatherData = async (latlon) => {
-  // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lng}&exclude=minutely,hourly,alerts&appid={API key}
   // Create request url
   let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?";
   weatherURL += `lat=${latlon.lat}&lon=${latlon.lon}`;
-  weatherURL += `&exclude=minutely,hourly,alerts&appid=${keyOpenWeather}`;
+  weatherURL += `&exclude=minutely,hourly,alerts&units=imperial&appid=${keyOpenWeather}`;
 
   // Call OpenWeather one call API
   const response = await fetch(weatherURL);
@@ -65,10 +73,13 @@ const getWeatherData = async (latlon) => {
 };
 
 // Update current weather forecast card
-const displayForecastCurrent = () => {};
+const displayForecastCurrent = (place, weather) => {
+  console.log(place);
+  console.log(weather);
+};
 
 // Update future weather forecast cards
-const displayForecast5Day = () => {};
+const displayForecast5Day = (weather) => {};
 
 // Save city name to local storage
 const saveCityName = () => {};
@@ -90,7 +101,7 @@ const handleCitySearch = () => {
   // if non-empty string - get city weather
   if (inputCity) {
     // inputCityEl.value = "";
-    getCityWeather(inputCity);
+    handleCityWeatherRequest(inputCity);
   }
 };
 
@@ -100,7 +111,7 @@ const handleSavedCitySearch = (event) => {
   const selectCity = event.target.textContent;
 
   // Get city weather
-  getCityWeather(selectCity);
+  handleCityWeatherRequest(selectCity);
 };
 
 // EVENT LISTENERS
