@@ -8,39 +8,40 @@ const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
 
 // FUNCTIONS
 // Handle getting city weather
-const getCityWeather = (city) => {
-  // Get City lat & long
-  const cityGeo = geocodeCity(city);
+const getCityWeather = async (city) => {
+  try {
+    // Get City lat & long
+    const cityLatLon = await geocodeCity(city);
+    console.log(cityLatLon);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Evaluate latitude and longitude of city name
-const geocodeCity = (city) => {
-  // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
+const geocodeCity = async (city) => {
+  // Create request url
   let geocodeURL = "http://api.openweathermap.org/geo/1.0/direct?";
   geocodeURL += `q=${city.toLowerCase()}`;
   geocodeURL += `&limit=2&appid=${keyOpenWeather}`;
 
   // Call OpenWeather Geocoding API
-  fetch(geocodeURL)
-    .then((response) => {
-      // if bad response - throw error and console log in catch
-      if (!response.ok) {
-        throw response.json();
-      }
+  const response = await fetch(geocodeURL);
 
-      return response.json();
-    })
-    .then((data) => {
-      // if zero data in response - alert no results found
-      // else - pull lat & long data for first returned response
-      if (!data.length) {
-        console.log(`No results found for ${city}`);
-      } else {
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  // if bad response - throw error and console log calling function catch
+  // else - convert response to JSON
+  if (!response.ok) {
+    throw response.json();
+  }
+  const data = await response.json();
+
+  // if no data returned - indicate no results found
+  // else - return lat & long for city
+  if (!data.length) {
+    throw `No results found for ${city}`;
+  }
+  const cityFound = data[0];
+  return { lat: cityFound.lat, lon: cityFound.lon };
 };
 
 // Perform openweather API call
