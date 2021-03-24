@@ -12,9 +12,10 @@ const getCityWeather = async (city) => {
   try {
     // Get City lat & long
     const cityLatLon = await geocodeCity(city);
-    console.log(cityLatLon);
+    const cityWeather = await getWeatherData(cityLatLon);
+    console.log(cityWeather);
   } catch (error) {
-    console.log(error);
+    console.warn(error);
   }
 };
 
@@ -28,7 +29,7 @@ const geocodeCity = async (city) => {
   // Call OpenWeather Geocoding API
   const response = await fetch(geocodeURL);
 
-  // if bad response - throw error and console log calling function catch
+  // if bad response - throw error and console log in calling function catch
   // else - convert response to JSON
   if (!response.ok) {
     throw response.json();
@@ -45,9 +46,22 @@ const geocodeCity = async (city) => {
 };
 
 // Perform openweather API call
-const getWeatherData = () => {
+const getWeatherData = async (latlon) => {
   // https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lng}&exclude=minutely,hourly,alerts&appid={API key}
+  // Create request url
   let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?";
+  weatherURL += `lat=${latlon.lat}&lon=${latlon.lon}`;
+  weatherURL += `&exclude=minutely,hourly,alerts&appid=${keyOpenWeather}`;
+
+  // Call OpenWeather one call API
+  const response = await fetch(weatherURL);
+
+  // if bad response - throw error and console log in calling function catch
+  // else - convert response to JSON and return
+  if (!response.ok) {
+    throw response.json();
+  }
+  return await response.json();
 };
 
 // Update current weather forecast card
