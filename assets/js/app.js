@@ -85,7 +85,14 @@ const displayForecast5Day = (weather) => {};
 const saveCityName = () => {};
 
 // Render list of city names
-const displayCityNames = () => {};
+const displayCityNames = () => {
+  savedCities = loadCityNames();
+
+  // Render each city name to searched-cities list
+  for (const city of savedCities) {
+    displayCityName(city);
+  }
+};
 
 // Add city to list of searched cities
 const displayCityName = () => {};
