@@ -1,7 +1,7 @@
 // DOM SELECTORS
 inputCityEl = document.querySelector("#input-city");
 btnSearch = document.querySelector("#btn-search");
-savedCitiesEl = document.querySelector("#saved-cities");
+savedCitiesEl = document.querySelector("#searched-cities");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -86,16 +86,28 @@ const saveCityName = () => {};
 
 // Render list of city names
 const displayCityNames = () => {
-  savedCities = loadCityNames();
+  searchedCities = loadCityNames();
 
   // Render each city name to searched-cities list
-  for (const city of savedCities) {
+  for (const city of searchedCities) {
     displayCityName(city);
   }
 };
 
 // Add city to list of searched cities
-const displayCityName = () => {};
+const displayCityName = (city) => {
+  const searchedCitiesEl = document.querySelector("#search-cities");
+
+  // Create list item and append to list
+  const cityListItem = document.createElement("li");
+  cityListItem.classList.add(
+    "list-group-item",
+    "list-group-item-action",
+    "text-capitalize"
+  );
+  cityListItem.textContent = city;
+  searchedCitiesEl.appendChild(cityListItem);
+};
 
 // Load city names from storage
 const loadCityNames = () => {
@@ -139,4 +151,4 @@ btnSearch.addEventListener("click", handleCitySearch);
 savedCitiesEl.addEventListener("click", handleSavedCitySearch);
 
 // WEBPAGE EXECUTION
-loadCityNames();
+displayCityNames();
