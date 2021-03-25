@@ -1,7 +1,7 @@
 // DOM SELECTORS
 inputCityEl = document.querySelector("#input-city");
 btnSearch = document.querySelector("#btn-search");
-savedCitiesEl = document.querySelector("#searched-cities");
+searchedCitiesEl = document.querySelector("#searched-cities");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -32,7 +32,7 @@ const handleCityWeatherRequest = async (city) => {
 const geocodeCity = async (city) => {
   // Create request url
   let geocodeURL = "http://api.openweathermap.org/geo/1.0/direct?";
-  geocodeURL += `q=${city.toLowerCase()}`;
+  geocodeURL += `q=${city}`;
   geocodeURL += `&limit=2&appid=${keyOpenWeather}`;
 
   // Call OpenWeather Geocoding API
@@ -50,6 +50,7 @@ const geocodeCity = async (city) => {
   if (!data.length) {
     throw `No results found for ${city}`;
   }
+  saveCityName(city);
   const cityFound = data[0];
   return { lat: cityFound.lat, lon: cityFound.lon };
 };
@@ -82,7 +83,15 @@ const displayForecastCurrent = (place, weather) => {
 const displayForecast5Day = (weather) => {};
 
 // Save city name to local storage
-const saveCityName = () => {};
+const saveCityName = (city) => {
+  searchedCities = loadCityNames();
+
+  // if city name already included in saved list end function execution
+  // else - add city name to saved list of searched cities and display
+  if (searchedCities.includes(city)) return;
+  searchedCities.push(city);
+  displayCityName(city);
+};
 
 // Render list of city names
 const displayCityNames = () => {
@@ -96,7 +105,7 @@ const displayCityNames = () => {
 
 // Add city to list of searched cities
 const displayCityName = (city) => {
-  const searchedCitiesEl = document.querySelector("#search-cities");
+  // const searchedCitiesEl = document.querySelector("#search-cities");
 
   // Create list item and append to list
   const cityListItem = document.createElement("li");
@@ -125,7 +134,7 @@ const loadCityNames = () => {
 // Handle city search from form entry
 const handleCitySearch = () => {
   // Get input city name
-  const inputCity = inputCityEl.value;
+  const inputCity = inputCityEl.value.toLowerCase();
 
   // if non-empty string - get city weather
   if (inputCity) {
@@ -137,7 +146,7 @@ const handleCitySearch = () => {
 // Handle city search from list of saved cities
 const handleSavedCitySearch = (event) => {
   // Get selected city name
-  const selectCity = event.target.textContent;
+  const selectCity = event.target.textContent.toLowerCase();
 
   // Get city weather
   handleCityWeatherRequest(selectCity);
@@ -148,7 +157,7 @@ const handleSavedCitySearch = (event) => {
 btnSearch.addEventListener("click", handleCitySearch);
 
 // Saved city search
-savedCitiesEl.addEventListener("click", handleSavedCitySearch);
+searchedCitiesEl.addEventListener("click", handleSavedCitySearch);
 
 // WEBPAGE EXECUTION
 displayCityNames();
