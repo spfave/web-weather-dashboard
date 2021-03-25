@@ -91,7 +91,17 @@ const displayCityNames = () => {};
 const displayCityName = () => {};
 
 // Load city names from storage
-const loadCityNames = () => {};
+const loadCityNames = () => {
+  // load searched cities from local storage
+  const searchedCities = localStorage.getItem("searchedCities");
+
+  // if searchedCities does not exist - return empty list
+  // else - return previously searched cities
+  if (!searchedCities) {
+    return [];
+  }
+  return JSON.parse(searchedCities);
+};
 
 // Handle city search from form entry
 const handleCitySearch = () => {
@@ -120,3 +130,6 @@ btnSearch.addEventListener("click", handleCitySearch);
 
 // Saved city search
 savedCitiesEl.addEventListener("click", handleSavedCitySearch);
+
+// WEBPAGE EXECUTION
+loadCityNames();
