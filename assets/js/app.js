@@ -91,6 +91,9 @@ const saveCityName = (city) => {
   if (searchedCities.includes(city)) return;
   searchedCities.push(city);
   displayCityName(city);
+
+  // Save updated searched cities list to local storage
+  localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
 };
 
 // Render list of city names
