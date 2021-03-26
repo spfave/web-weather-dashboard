@@ -1,7 +1,9 @@
 // DOM SELECTORS
 inputCityEl = document.querySelector("#input-city");
 btnSearch = document.querySelector("#btn-search");
+
 searchedCitiesEl = document.querySelector("#searched-cities");
+btnClearSearch = document.querySelector("#btn-clear-search");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -148,7 +150,7 @@ const handleCitySearch = () => {
 
   // if non-empty string - get city weather
   if (inputCity) {
-    // inputCityEl.value = "";
+    inputCityEl.value = "";
     handleCityWeatherRequest(inputCity);
   }
 };
@@ -162,6 +164,13 @@ const handleSavedCitySearch = (event) => {
   handleCityWeatherRequest(selectCity);
 };
 
+//
+const clearSearchedCities = () => {
+  localStorage.removeItem("searchedCities");
+  searchedCitiesEl.innerHTML = "";
+  // displayCityNames();
+};
+
 // EVENT LISTENERS
 // Text entry search
 btnSearch.addEventListener("click", handleCitySearch);
@@ -171,6 +180,9 @@ inputCityEl.addEventListener("keyup", (event) => {
 
 // Saved city search
 searchedCitiesEl.addEventListener("click", handleSavedCitySearch);
+
+// Clear city search history
+btnClearSearch.addEventListener("click", clearSearchedCities);
 
 // WEBPAGE EXECUTION
 displayCityNames();
