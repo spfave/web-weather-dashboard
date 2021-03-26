@@ -31,9 +31,13 @@ const handleCityWeatherRequest = async (city) => {
 // Evaluate latitude and longitude of city name
 const geocodeCity = async (city) => {
   // Create request url
-  let geocodeURL = "http://api.openweathermap.org/geo/1.0/direct?";
-  geocodeURL += `q=${city}`;
-  geocodeURL += `&limit=2&appid=${keyOpenWeather}`;
+  const geocodeURL = new URL("http://api.openweathermap.org/geo/1.0/direct");
+  const params = new URLSearchParams({
+    q: city,
+    limit: 2,
+    appid: keyOpenWeather,
+  }).toString();
+  geocodeURL.search = params;
 
   // Call OpenWeather Geocoding API
   const response = await fetch(geocodeURL);
@@ -50,17 +54,24 @@ const geocodeCity = async (city) => {
   if (!data.length) {
     throw `No results found for ${city}`;
   }
-  saveCityName(city);
+
   const cityFound = data[0];
+  saveCityName(cityFound.name);
   return { lat: cityFound.lat, lon: cityFound.lon };
 };
 
 // Perform openweather API call
 const getWeatherData = async (latlon) => {
   // Create request url
-  let weatherURL = "https://api.openweathermap.org/data/2.5/onecall?";
-  weatherURL += `lat=${latlon.lat}&lon=${latlon.lon}`;
-  weatherURL += `&exclude=minutely,hourly,alerts&units=imperial&appid=${keyOpenWeather}`;
+  const weatherURL = new URL("https://api.openweathermap.org/data/2.5/onecall");
+  const params = new URLSearchParams({
+    lat: latlon.lat,
+    lon: latlon.lon,
+    exclude: ["minutely", "hourly", "alerts"],
+    units: "imperial",
+    appid: keyOpenWeather,
+  }).toString();
+  weatherURL.search = params;
 
   // Call OpenWeather one call API
   const response = await fetch(weatherURL);
@@ -112,11 +123,7 @@ const displayCityName = (city) => {
 
   // Create list item and append to list
   const cityListItem = document.createElement("li");
-  cityListItem.classList.add(
-    "list-group-item",
-    "list-group-item-action",
-    "text-capitalize"
-  );
+  cityListItem.classList.add("list-group-item", "list-group-item-action");
   cityListItem.textContent = city;
   searchedCitiesEl.appendChild(cityListItem);
 };
