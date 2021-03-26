@@ -1,7 +1,7 @@
 // DOM SELECTORS
 inputCityEl = document.querySelector("#input-city");
 btnSearch = document.querySelector("#btn-search");
-
+searchHistory = document.querySelector("#search-history");
 searchedCitiesEl = document.querySelector("#searched-cities");
 btnClearSearch = document.querySelector("#btn-clear-search");
 
@@ -121,7 +121,8 @@ const displayCityNames = () => {
 
 // Add city to list of searched cities
 const displayCityName = (city) => {
-  // const searchedCitiesEl = document.querySelector("#search-cities");
+  // Show searched cities history
+  if (searchHistory.hidden) searchHistory.hidden = false;
 
   // Create list item and append to list
   const cityListItem = document.createElement("li");
@@ -164,11 +165,11 @@ const handleSavedCitySearch = (event) => {
   handleCityWeatherRequest(selectCity);
 };
 
-//
+// Clear searched cities history and hide list
 const clearSearchedCities = () => {
+  searchHistory.hidden = true;
   localStorage.removeItem("searchedCities");
   searchedCitiesEl.innerHTML = "";
-  // displayCityNames();
 };
 
 // EVENT LISTENERS
