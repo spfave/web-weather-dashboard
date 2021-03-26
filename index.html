@@ -29,7 +29,7 @@
   <main>
     <!-- Search -->
     <section class="sec-search bg-light">
-      <form id="search-city">
+      <form id="search-city" onsubmit="return false">
         <div class="form-group">
           <label for="input-city">
             <h5 class="p-0">See Forecast for</h5>
@@ -44,11 +44,10 @@
       </form>
 
       <h5>Previous Searches</h5>
-      <ul id="saved-cities" class="list-group">
+      <ul id="searched-cities" class="list-group">
         <!-- List of searched cities created here -->
-        <!-- Note use .active to highlight selection -->
-        <li class="list-group-item list-group-item-action">Paris</li>
-        <li class="list-group-item list-group-item-action">Oakton</li>
+        <!-- <li class="list-group-item list-group-item-action">Paris</li>
+        <li class="list-group-item list-group-item-action">Oakton</li> -->
       </ul>
     </section>
 

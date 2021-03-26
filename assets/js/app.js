@@ -158,6 +158,9 @@ const handleSavedCitySearch = (event) => {
 // EVENT LISTENERS
 // Text entry search
 btnSearch.addEventListener("click", handleCitySearch);
+inputCityEl.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") handleCitySearch();
+});
 
 // Saved city search
 searchedCitiesEl.addEventListener("click", handleSavedCitySearch);
