@@ -9,7 +9,7 @@ const btnFormWthOpt = document.querySelector("#form-weather-search-options");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
-let units = "imperial";
+let units;
 
 // FUNCTIONS
 // Handle getting city weather
@@ -147,7 +147,25 @@ const loadCityNames = () => {
   return JSON.parse(searchedCities);
 };
 
-//
+// Load weather search options from storage
+const loadWeatherSearchOptions = () => {
+  units = localStorage.getItem("units");
+
+  // if units does not exist - set starting units to imperial
+  if (!units) {
+    units = "imperial";
+  }
+
+  // Set search units in modal
+  document.querySelector(
+    `input[name="radios-units"][value="${units}"]`
+  ).checked = true;
+};
+
+// Save weather search option to storage
+const saveWeatherSearchOptions = (unitsSelected) => {
+  localStorage.setItem("units", unitsSelected);
+};
 
 // Handle city search from form entry
 const handleCitySearch = () => {
@@ -181,6 +199,7 @@ const clearSearchedCities = () => {
 const setWeatherSearchOptions = (event) => {
   event.preventDefault();
   units = document.querySelector('input[name="radios-units"]:checked').value;
+  saveWeatherSearchOptions(units);
 
   modalWthOpt.modal("hide");
 };
@@ -203,6 +222,4 @@ btnFormWthOpt.addEventListener("submit", setWeatherSearchOptions);
 
 // WEBPAGE EXECUTION
 displayCityNames();
-document.querySelector(
-  `input[name="radios-units"][value="${units}"]`
-).checked = true;
+loadWeatherSearchOptions();
