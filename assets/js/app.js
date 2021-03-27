@@ -1,6 +1,7 @@
 // DOM SELECTORS
 const inputCityEl = document.querySelector("#input-city");
 const btnSearch = document.querySelector("#btn-search");
+const btnSearchOpt = document.querySelector("#btn-search-options");
 const searchHistoryEl = document.querySelector("#search-history");
 const searchedCitiesEl = document.querySelector("#searched-cities");
 const btnClearSearch = document.querySelector("#btn-clear-search");
@@ -160,11 +161,6 @@ const loadWeatherSearchOptions = () => {
   if (!units) {
     units = "imperial";
   }
-
-  // Set search units in modal
-  document.querySelector(
-    `input[name="radios-units"][value="${units}"]`
-  ).checked = true;
 };
 
 // Save weather search option to storage
@@ -217,12 +213,26 @@ const clearSearchedCities = () => {
   searchedCitiesEl.innerHTML = "";
 };
 
-// Set Weather search options
+// Show weather search options
+const showWeatherSearchOptions = () => {
+  // Show modal
+  modalWthOpt.modal("show");
+
+  // Show current set search units in modal
+  document.querySelector(
+    `input[name="radios-units"][value="${units}"]`
+  ).checked = true;
+};
+
+// Set weather search options
 const setWeatherSearchOptions = (event) => {
   event.preventDefault();
+
+  // Get value of units selected and save to storage
   units = document.querySelector('input[name="radios-units"]:checked').value;
   saveWeatherSearchOptions(units);
 
+  // Hide modal
   modalWthOpt.modal("hide");
 };
 
@@ -239,7 +249,8 @@ searchedCitiesEl.addEventListener("click", handleSavedCitySearch);
 // Clear city search history
 btnClearSearch.addEventListener("click", clearSearchedCities);
 
-// Select weather search options
+// Open/Set weather search options
+btnSearchOpt.addEventListener("click", showWeatherSearchOptions);
 btnFormWthOpt.addEventListener("submit", setWeatherSearchOptions);
 
 // WEBPAGE EXECUTION
