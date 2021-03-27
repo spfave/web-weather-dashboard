@@ -56,44 +56,6 @@
       </div>
     </section>
 
-    <!-- Modal: Weather Search Options -->
-    <div id="modal-weather-search-options" class="modal fade" role="dialog" tabindex="-1">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-          <div class="modal-header bg-primary">
-            <h5 class="modal-title text-light">Weather Search Options</h5>
-            <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <form id="form-weather-search-options">
-            <div class="modal-body">
-              <legend class="display-5">Units</legend>
-              <div class="form-check">
-                <input id="radio-imperial" class="form-check-input" type="radio" name="radios-units" value="imperial">
-                <label class="form-check-label" for="radio-imperial">
-                  Imperial
-                </label>
-              </div>
-              <div class="form-check">
-                <input id="radio-metric" class="form-check-input" type="radio" name="radios-units" value="metric">
-                <label class="form-check-label" for="radio-metric">
-                  Metric
-                </label>
-              </div>
-            </div>
-
-            <div class="modal-footer bg-light">
-              <button id="" class="btn btn-info" type="submit">Save</button>
-            </div>
-          </form>
-
-        </div>
-      </div>
-    </div>
-
     <!-- Forecast-current -->
     <section id="forecast-current">
       <h4 class="">Current Conditions</h4>
@@ -141,6 +103,44 @@
       </div>
     </section>
   </main>
+
+  <!-- Modal: Weather Search Options -->
+  <div id="modal-weather-search-options" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header bg-primary">
+          <h5 class="modal-title text-light">Weather Search Options</h5>
+          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form id="form-weather-search-options">
+          <div class="modal-body">
+            <legend class="display-5">Units</legend>
+            <div class="form-check">
+              <input id="radio-imperial" class="form-check-input" type="radio" name="radios-units" value="imperial">
+              <label class="form-check-label" for="radio-imperial">
+                Imperial
+              </label>
+            </div>
+            <div class="form-check">
+              <input id="radio-metric" class="form-check-input" type="radio" name="radios-units" value="metric">
+              <label class="form-check-label" for="radio-metric">
+                Metric
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-footer bg-light">
+            <button id="" class="btn btn-info" type="submit">Save</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
 
   <!-- JS Imports: JQuery, Bootstrap, Moment.js -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

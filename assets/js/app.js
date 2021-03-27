@@ -98,20 +98,6 @@ const displayForecastCurrent = (place, weather) => {
 // Update future weather forecast cards
 const displayForecast5Day = (weather) => {};
 
-// Save city name to local storage
-const saveCityName = (city) => {
-  searchedCities = loadCityNames();
-
-  // if city name already included in saved list end function execution
-  // else - add city name to saved list of searched cities and display
-  if (searchedCities.includes(city)) return;
-  searchedCities.push(city);
-  displayCityName(city);
-
-  // Save updated searched cities list to local storage
-  localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
-};
-
 // Render list of city names
 const displayCityNames = () => {
   searchedCities = loadCityNames();
@@ -145,6 +131,20 @@ const loadCityNames = () => {
     return [];
   }
   return JSON.parse(searchedCities);
+};
+
+// Save city name to local storage
+const saveCityName = (city) => {
+  searchedCities = loadCityNames();
+
+  // if city name already included in saved list end function execution
+  // else - add city name to saved list of searched cities and display
+  if (searchedCities.includes(city)) return;
+  searchedCities.push(city);
+  displayCityName(city);
+
+  // Save updated searched cities list to local storage
+  localStorage.setItem("searchedCities", JSON.stringify(searchedCities));
 };
 
 // Load weather search options from storage
