@@ -6,8 +6,8 @@
 /* Tags */
 body,
 main {
-  height: 100vh;
-  overflow: hidden;
+  /* height: 100vh; */
+  /* overflow: hidden; */
 }
 
 h1,
@@ -52,14 +52,14 @@ section {
   padding: 0.5rem;
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .sec-search {
     height: 100vh;
   }
-}
+} */
 
 /* Alert */
-#alert {
+.alert {
   margin: 0 20px;
 }
 

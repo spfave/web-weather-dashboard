@@ -4,8 +4,11 @@ const btnSearch = document.querySelector("#btn-search");
 const searchHistoryEl = document.querySelector("#search-history");
 const searchedCitiesEl = document.querySelector("#searched-cities");
 const btnClearSearch = document.querySelector("#btn-clear-search");
+
 const modalWthOpt = $("#modal-weather-search-options");
 const btnFormWthOpt = document.querySelector("#form-weather-search-options");
+
+const forecastCurrentEl = document.querySelector("#forecast-current");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -177,8 +180,8 @@ const showAlert = (message, alertType) => {
   alert.innerHTML = `<p>${message}</p>`;
 
   // Insert alert div in DOM
-  const alertEl = document.querySelector("#alert");
-  alertEl.appendChild(alert);
+  const forecastEl = document.querySelector("#forecast");
+  forecastEl.insertBefore(alert, forecastCurrentEl);
 
   // Timeout alert message after 1 second
   setTimeout(() => {
