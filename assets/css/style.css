@@ -4,12 +4,6 @@
 }
 
 /* Tags */
-body,
-main {
-  /* height: 100vh; */
-  /* overflow: hidden; */
-}
-
 h1,
 h3,
 h4,
@@ -52,11 +46,16 @@ section {
   padding: 0.5rem;
 }
 
-/* @media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
+  html,
+  body,
+  main,
+  .h-page,
   .sec-search {
-    height: 100vh;
+    height: 100%;
+    overflow: hidden;
   }
-} */
+}
 
 /* Alert */
 .alert {
