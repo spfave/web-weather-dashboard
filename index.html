@@ -26,85 +26,90 @@
     <h1 class="text-center text-light text-">Weather Dashboard</h1>
   </header>
 
-  <main>
-    <!-- Search -->
-    <section class="sec-search bg-light">
-      <form id="search-city" class="m-0" onsubmit="return false">
-        <div class="form-group m-0">
-          <label for="input-city">
-            <h5 class="p-0">See Forecast for</h5>
-          </label>
-          <div class="input-group">
-            <input id="input-city" class="form-control" type="text" placeholder="Enter City Name">
-            <div class="input-group-append">
-              <button id="btn-search" class="btn btn-info" type="button"><i class="bi bi-search"></i></button>
-              <button class="btn btn-info" type="button" data-toggle="modal"
-                data-target="#modal-weather-search-options"><i class="bi bi-list"></i></button>
+  <main class="container-fluid">
+    <div class="row">
+
+
+      <!-- Search -->
+      <section class="sec-search bg-light col-12 col-md-4 col-lg-3">
+        <form id="search-city" class="m-0" onsubmit="return false">
+          <div class="form-group m-0">
+            <label for="input-city">
+              <h5 class="p-0">See Forecast for</h5>
+            </label>
+            <div class="input-group">
+              <input id="input-city" class="form-control" type="text" placeholder="Enter City Name">
+              <div class="input-group-append">
+                <button id="btn-search" class="btn btn-info" type="button"><i class="bi bi-search"></i></button>
+                <button class="btn btn-info" type="button" data-toggle="modal"
+                  data-target="#modal-weather-search-options"><i class="bi bi-list"></i>
+                </button>
+              </div>
             </div>
           </div>
+        </form>
+
+        <div id="search-history" class="mt-3" hidden>
+          <h5>Previous Searches</h5>
+          <ul id="searched-cities" class="list-group">
+            <!-- List of searched cities created here -->
+          </ul>
+          <button id="btn-clear-search" class="btn btn-outline-info btn-block mt-2">Clear Searches</button>
         </div>
-      </form>
+      </section>
 
-      <div id="search-history" class="mt-3" hidden>
-        <h5>Previous Searches</h5>
-        <ul id="searched-cities" class="list-group">
-          <!-- List of searched cities created here -->
-          <!-- <li class="list-group-item list-group-item-action">Paris</li>
-            <li class="list-group-item list-group-item-action">Oakton</li> -->
-        </ul>
-        <button id="btn-clear-search" class="btn btn-outline-info btn-block mt-2">Clear Searches</button>
-      </div>
-    </section>
+      <!-- <div id="alert" class="col-12 col-md-7">
+      </div> -->
 
-    <div id="alert">
-    </div>
-
-    <!-- Forecast-current -->
-    <section id="forecast-current">
-      <h4 class="">Current Conditions</h4>
-      <div class="card">
-        <header class="card-header bg-info p-0 text-light">
-          <div class="d-flex">
-            <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather condition icon">
-            <div class="d-flex flex-column justify-content-center">
-              <h4>Fairfax</h4>
-              <p>Today</p>
-            </div>
-          </div>
-        </header>
-        <div class="card-body">
-          <p class="d-flex">
-            <span class="temperature">60</span>
-            <span class="temp-unit">&deg;F</span>
-          </p>
-          <p>Humidity: 40%</p>
-          <p>Wind Speed: 4.0 mph</p>
-          <p>UV Index: <span class="">5.0</span></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Forecast 5-day -->
-    <section id="forecast-5day">
-      <h4 class="">5-Day Outlook</h4>
-      <div class="container-fluid">
-        <div id="" class="row">
-          <!-- Grid of forecast cards created here -->
-          <div class="card text-light bg-info">
-            <header class="card-header p-0">
-              <img src="http://openweathermap.org/img/wn/10d.png" alt="">
-              Tomorrow
+      <div class="col-12 col-md-8 col-lg-9 p-0">
+        <!-- Forecast-current -->
+        <section id="forecast-current">
+          <h4 class="">Current Conditions</h4>
+          <div class="card">
+            <header class="card-header bg-info p-0 text-light">
+              <div class="d-flex">
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather condition icon">
+                <div class="d-flex flex-column justify-content-center">
+                  <h4>Fairfax</h4>
+                  <p>Today</p>
+                </div>
+              </div>
             </header>
             <div class="card-body">
-              <p>Temperature: 60 &deg;F</p>
-              <p>Wind: 3.0 mph</p>
+              <p class="d-flex">
+                <span class="temperature">60</span>
+                <span class="temp-unit">&deg;F</span>
+              </p>
               <p>Humidity: 40%</p>
+              <p>Wind Speed: 4.0 mph</p>
+              <p>UV Index: <span class="">5.0</span></p>
             </div>
           </div>
+        </section>
 
-        </div>
+        <!-- Forecast 5-day -->
+        <section id="forecast-5day">
+          <h4 class="">5-Day Outlook</h4>
+          <div class="container-fluid">
+            <div id="" class="row">
+              <!-- Grid of forecast cards created here -->
+              <div class="card text-light bg-info">
+                <header class="card-header p-0">
+                  <img src="http://openweathermap.org/img/wn/10d.png" alt="">
+                  Tomorrow
+                </header>
+                <div class="card-body">
+                  <p>Temperature: 60 &deg;F</p>
+                  <p>Wind: 3.0 mph</p>
+                  <p>Humidity: 40%</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   </main>
 
   <!-- Modal: Weather Search Options -->
