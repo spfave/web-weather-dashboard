@@ -147,6 +147,8 @@ const loadCityNames = () => {
   return JSON.parse(searchedCities);
 };
 
+//
+
 // Handle city search from form entry
 const handleCitySearch = () => {
   // Get input city name
@@ -175,8 +177,8 @@ const clearSearchedCities = () => {
   searchedCitiesEl.innerHTML = "";
 };
 
-//
-const selectWeatherSearchOptions = (event) => {
+// Set Weather search options
+const setWeatherSearchOptions = (event) => {
   event.preventDefault();
   units = document.querySelector('input[name="radios-units"]:checked').value;
 
@@ -197,7 +199,10 @@ searchedCitiesEl.addEventListener("click", handleSavedCitySearch);
 btnClearSearch.addEventListener("click", clearSearchedCities);
 
 // Select weather search options
-btnFormWthOpt.addEventListener("submit", selectWeatherSearchOptions);
+btnFormWthOpt.addEventListener("submit", setWeatherSearchOptions);
 
 // WEBPAGE EXECUTION
 displayCityNames();
+document.querySelector(
+  `input[name="radios-units"][value="${units}"]`
+).checked = true;
