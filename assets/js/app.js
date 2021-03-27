@@ -1,12 +1,15 @@
 // DOM SELECTORS
-inputCityEl = document.querySelector("#input-city");
-btnSearch = document.querySelector("#btn-search");
-searchHistory = document.querySelector("#search-history");
-searchedCitiesEl = document.querySelector("#searched-cities");
-btnClearSearch = document.querySelector("#btn-clear-search");
+const inputCityEl = document.querySelector("#input-city");
+const btnSearch = document.querySelector("#btn-search");
+const searchHistoryEl = document.querySelector("#search-history");
+const searchedCitiesEl = document.querySelector("#searched-cities");
+const btnClearSearch = document.querySelector("#btn-clear-search");
+const modalWthOpt = $("#modal-weather-search-options");
+const btnFormWthOpt = document.querySelector("#form-weather-search-options");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
+let units = "imperial";
 
 // FUNCTIONS
 // Handle getting city weather
@@ -70,7 +73,7 @@ const getWeatherData = async (latlon) => {
     lat: latlon.lat,
     lon: latlon.lon,
     exclude: ["minutely", "hourly", "alerts"],
-    units: "imperial",
+    units: units,
     appid: keyOpenWeather,
   }).toString();
   weatherURL.search = params;
@@ -122,7 +125,7 @@ const displayCityNames = () => {
 // Add city to list of searched cities
 const displayCityName = (city) => {
   // Show searched cities history
-  if (searchHistory.hidden) searchHistory.hidden = false;
+  if (searchHistoryEl.hidden) searchHistoryEl.hidden = false;
 
   // Create list item and append to list
   const cityListItem = document.createElement("li");
@@ -167,9 +170,17 @@ const handleSavedCitySearch = (event) => {
 
 // Clear searched cities history and hide list
 const clearSearchedCities = () => {
-  searchHistory.hidden = true;
+  searchHistoryEl.hidden = true;
   localStorage.removeItem("searchedCities");
   searchedCitiesEl.innerHTML = "";
+};
+
+//
+const selectWeatherSearchOptions = (event) => {
+  event.preventDefault();
+  units = document.querySelector('input[name="radios-units"]:checked').value;
+
+  modalWthOpt.modal("hide");
 };
 
 // EVENT LISTENERS
@@ -184,6 +195,9 @@ searchedCitiesEl.addEventListener("click", handleSavedCitySearch);
 
 // Clear city search history
 btnClearSearch.addEventListener("click", clearSearchedCities);
+
+// Select weather search options
+btnFormWthOpt.addEventListener("submit", selectWeatherSearchOptions);
 
 // WEBPAGE EXECUTION
 displayCityNames();
