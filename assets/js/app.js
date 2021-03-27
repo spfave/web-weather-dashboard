@@ -57,7 +57,9 @@ const geocodeCity = async (city) => {
   // if no data returned - indicate no results found
   // else - return lat & long for city
   if (!data.length) {
-    throw `No results found for ${city}`;
+    const alertMsg = `No results found for ${city}`;
+    showAlert(alertMsg, "warning");
+    throw alertMsg;
   }
 
   const cityFound = data[0];
@@ -165,6 +167,23 @@ const loadWeatherSearchOptions = () => {
 // Save weather search option to storage
 const saveWeatherSearchOptions = (unitsSelected) => {
   localStorage.setItem("units", unitsSelected);
+};
+
+// Show alert
+const showAlert = (message, alertType) => {
+  // Create alert div
+  const alert = document.createElement("div");
+  alert.className = `alert alert-${alertType} text-center mt-4`;
+  alert.innerHTML = `<p>${message}</p>`;
+
+  // Insert alert div in DOM
+  const alertEl = document.querySelector("#alert");
+  alertEl.appendChild(alert);
+
+  // Timeout alert message after 1 second
+  setTimeout(() => {
+    document.querySelector(".alert").remove();
+  }, 2000);
 };
 
 // Handle city search from form entry
