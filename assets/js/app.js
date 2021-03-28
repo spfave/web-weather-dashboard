@@ -24,9 +24,9 @@ const handleCityWeatherRequest = async (city) => {
   let cityFound;
   let cityWeather;
 
-  //
+  // Wrap API fetch call functions with try-catch block to handle errors
   try {
-    // Get City lat & long
+    // Find City with lat & long
     cityFound = await geocodeCity(city);
     // Get City weather data
     cityWeather = await getWeatherData(cityFound);
@@ -36,7 +36,6 @@ const handleCityWeatherRequest = async (city) => {
   }
 
   // Display weather results
-  // console.log(cityWeather);
   displayForecastCurrent(cityFound.name, cityWeather.current);
   displayForecast5Day(cityWeather.daily);
 };
@@ -44,7 +43,7 @@ const handleCityWeatherRequest = async (city) => {
 // Evaluate latitude and longitude of city name
 const geocodeCity = async (city) => {
   // Create request url
-  const geocodeURL = new URL("http://api.openweathermap.org/geo/1.0/direct");
+  const geocodeURL = new URL("https://api.openweathermap.org/geo/1.0/direct");
   const params = new URLSearchParams({
     q: city,
     limit: 2,
@@ -73,7 +72,6 @@ const geocodeCity = async (city) => {
   const cityFound = data[0];
   saveCityName(cityFound.name);
   return cityFound;
-  // return { lat: cityFound.lat, lon: cityFound.lon };
 };
 
 // Perform openweather API call
@@ -162,7 +160,13 @@ const displayForecast5Day = (weather) => {
         <img src="http://openweathermap.org/img/wn/${
           dayWthr.weather[0].icon
         }.png" alt="weather condition icon">
-        ${day === 0 ? "Tomorrow" : moment().add(day, "days").format("dddd")}
+        ${
+          day === 0
+            ? "Tomorrow"
+            : moment()
+                .add(day + 1, "days")
+                .format("dddd")
+        }
       </header>
       <div class="card-body">
         <div class="d-table">
@@ -240,7 +244,7 @@ const saveCityName = (city) => {
 const loadWeatherSearchOptions = () => {
   units = localStorage.getItem("units");
 
-  // if units does not exist - set starting units to imperial
+  // if stored units does not exist - set starting units to imperial
   if (!units) {
     units = "imperial";
   }
