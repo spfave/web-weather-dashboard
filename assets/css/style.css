@@ -37,6 +37,20 @@ section {
   padding: 20px;
 }
 
+/* Utility Classes */
+.d-table {
+  display: table;
+}
+.d-table > div {
+  display: table-row;
+}
+.d-table > div > p {
+  display: table-cell;
+}
+.d-table > div > p:nth-child(2) {
+  width: 60px;
+}
+
 /* Search */
 .sec-search h5 {
   padding-bottom: 10px;
@@ -44,17 +58,6 @@ section {
 
 .sec-search .list-group-item {
   padding: 0.5rem;
-}
-
-@media screen and (min-width: 768px) {
-  html,
-  body,
-  main,
-  .h-page,
-  .sec-search {
-    height: 100%;
-    overflow: hidden;
-  }
 }
 
 /* Alert */
@@ -90,5 +93,38 @@ section h4 {
 
 #forecast-current .card-body .temp-unit {
   font-size: 1.5rem;
-  margin-left: 5px;
+  margin-left: 10px;
+}
+
+#forecast-current .d-table > div > p {
+  padding: 5px 20px 5px 0;
+}
+#forecast-current .d-table > div > p:last-child {
+  padding-right: 0;
+}
+
+/* Forecast 5-Day */
+#forecast-5day .d-flex-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#forecast-5day .d-flex-row .card {
+  flex: 1 0 180px;
+}
+
+#forecast-5day .card-body {
+  padding: 15px 12px;
+}
+
+#forecast-5day .d-table {
+  width: 100%;
+}
+#forecast-5day .d-table > div > p {
+  padding: 5px 5px 5px 0;
+}
+#forecast-5day .d-table > div > p:last-child {
+  padding-right: 0;
 }
