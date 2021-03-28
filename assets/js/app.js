@@ -106,6 +106,16 @@ const displayForecastCurrent = (place, weather) => {
   const wthrCurCard = document.createElement("div");
   wthrCurCard.classList.add("card");
 
+  // Evaluation to populate UV Index color based on value
+  let uvWarning;
+  if (weather.uvi <= 4) {
+    uvWarning = "success";
+  } else if (weather.uvi <= 7) {
+    uvWarning = "warning";
+  } else {
+    uvWarning = "danger";
+  }
+
   wthrCurCard.innerHTML = `
     <header class="card-header bg-info p-0 text-light">
       <div class="d-flex">
@@ -134,7 +144,9 @@ const displayForecastCurrent = (place, weather) => {
         </div>
         <div>
           <p>UV Index:</p>
-          <p id="uv-index">${weather.uvi.toFixed(1)}</p>
+          <p id="uv-index" class="btn-${uvWarning} rounded">${weather.uvi.toFixed(
+    1
+  )}</p>
         </div>
       </div>
     </div>`;

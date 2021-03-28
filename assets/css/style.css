@@ -48,7 +48,8 @@ section {
   display: table-cell;
 }
 .d-table > div > p:nth-child(2) {
-  width: 60px;
+  width: 65px;
+  text-align: center;
 }
 
 /* Search */
