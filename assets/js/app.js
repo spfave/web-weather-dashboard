@@ -21,14 +21,15 @@ let units;
 // FUNCTIONS
 // Handle getting city weather
 const handleCityWeatherRequest = async (city) => {
+  let cityFound;
   let cityWeather;
 
   //
   try {
     // Get City lat & long
-    const cityLatLon = await geocodeCity(city);
+    cityFound = await geocodeCity(city);
     // Get City weather data
-    cityWeather = await getWeatherData(cityLatLon);
+    cityWeather = await getWeatherData(cityFound);
   } catch (error) {
     console.warn(error);
     return;
@@ -36,7 +37,7 @@ const handleCityWeatherRequest = async (city) => {
 
   // Display weather results
   // console.log(cityWeather);
-  displayForecastCurrent(city, cityWeather.current);
+  displayForecastCurrent(cityFound.name, cityWeather.current);
   displayForecast5Day(cityWeather.daily);
 };
 
@@ -71,7 +72,8 @@ const geocodeCity = async (city) => {
 
   const cityFound = data[0];
   saveCityName(cityFound.name);
-  return { lat: cityFound.lat, lon: cityFound.lon };
+  return cityFound;
+  // return { lat: cityFound.lat, lon: cityFound.lon };
 };
 
 // Perform openweather API call
@@ -284,7 +286,6 @@ const handleCitySearch = () => {
 const handleSavedCitySearch = (event) => {
   // Get selected city name
   const selectCity = event.target.textContent.toLowerCase();
-
   // Get city weather
   handleCityWeatherRequest(selectCity);
 };
