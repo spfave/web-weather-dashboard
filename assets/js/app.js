@@ -10,6 +10,7 @@ const modalWthOpt = $("#modal-weather-search-options");
 const btnFormWthOpt = document.querySelector("#form-weather-search-options");
 
 const forecastCurrentEl = document.querySelector("#forecast-current");
+const forecastCurrentCardEl = document.querySelector("#forecast-current-card");
 const forecast5DayEl = document.querySelector("#forecast-5day");
 const forecast5DayCardsEl = document.querySelector("#forecast-5day-cards");
 
@@ -137,15 +138,14 @@ const displayForecastCurrent = (place, weather) => {
         </div>
       </div>
     </div>`;
-  forecastCurrentEl.innerHTML = "";
-  forecastCurrentEl.appendChild(wthrCurCard);
+  forecastCurrentCardEl.innerHTML = "";
+  forecastCurrentCardEl.appendChild(wthrCurCard);
   forecastCurrentEl.hidden = false;
 };
 
 // Update future weather forecast cards
 const displayForecast5Day = (weather) => {
   const wthrUnits = units === "imperial" ? unitName.imperial : unitName.metric;
-  console.log(weather);
 
   // Loop over first five entries daily weather forecast and create weather forecast card
   forecast5DayCardsEl.innerHTML = "";
