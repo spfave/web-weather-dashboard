@@ -285,7 +285,10 @@ const handleCitySearch = () => {
 // Handle city search from list of saved cities
 const handleSavedCitySearch = (event) => {
   // Get selected city name
-  const selectCity = event.target.textContent.toLowerCase();
+  const selectCity = event.target.textContent
+    .toLowerCase()
+    .replace(/[^a-z]/i, "");
+
   // Get city weather
   handleCityWeatherRequest(selectCity);
 };
