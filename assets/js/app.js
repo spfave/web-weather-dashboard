@@ -97,8 +97,45 @@ const getWeatherData = async (latlon) => {
 
 // Update current weather forecast card
 const displayForecastCurrent = (place, weather) => {
-  console.log(place);
-  console.log(weather);
+  const weatherCurEl = document.createElement("div");
+  weatherCurEl.classList.add("card");
+
+  const wthrIcon = weather.weather[0].icon;
+  const wthrUnits = units === "imperial" ? unitName.imperial : unitName.metric;
+
+  weatherCurEl.innerHTML = `
+    <header class="card-header bg-info p-0 text-light">
+      <div class="d-flex">
+        <img src="http://openweathermap.org/img/wn/${wthrIcon}@2x.png" alt="weather condition icon">
+        <div class="d-flex flex-column justify-content-center">
+          <h4>${place}</h4>
+          <p>${moment().format("dddd, MMMM Do, YYYY")}</p>
+        </div>
+      </div>
+    </header>
+    <div class="card-body">
+      <p class="d-flex align-items-start">
+        <span class="temperature">${weather.temp.toFixed(0)}</span>
+        <span class="temp-unit">&deg;${wthrUnits.temp}</span>
+      </p>
+      <div class="d-table">
+        <div>
+          <p>Wind Speed:</p>
+          <p>${weather.wind_speed.toFixed(1)} ${wthrUnits.windSpeed}</p>
+        </div>
+        <div>
+          <p>Humidity:</p>
+          <p>${weather.humidity}%</p>
+        </div>
+        <div>
+          <p>UV Index:</p>
+          <p id="uv-index">${weather.uvi.toFixed(1)}</p>
+        </div>
+      </div>
+    </div>`;
+  forecastCurrentEl.innerHTML = ``;
+  forecastCurrentEl.appendChild(weatherCurEl);
+  forecastCurrentEl.hidden = false;
 };
 
 // Update future weather forecast cards

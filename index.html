@@ -55,39 +55,8 @@
 
       <div id="forecast" class="col-12 col-md-8 col-lg-9 p-0">
         <!-- Forecast-current -->
-        <section id="forecast-current">
+        <section id="forecast-current" hidden>
           <h4 class="">Current Conditions</h4>
-          <div class="card">
-            <header class="card-header bg-info p-0 text-light">
-              <div class="d-flex">
-                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather condition icon">
-                <div class="d-flex flex-column justify-content-center">
-                  <h4>Fairfax</h4>
-                  <p>Today</p>
-                </div>
-              </div>
-            </header>
-            <div class="card-body">
-              <p class="d-flex align-items-start">
-                <span class="temperature">60</span>
-                <span class="temp-unit">&deg;F</span>
-              </p>
-              <div class="d-table">
-                <div>
-                  <p>Wind Speed:</p>
-                  <p>4.0 mph</p>
-                </div>
-                <div>
-                  <p>Humidity:</p>
-                  <p>40%</p>
-                </div>
-                <div>
-                  <p>UV Index:</p>
-                  <p id="uv-index">5.0</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </section>
 
         <!-- Forecast 5-day -->
@@ -261,6 +230,7 @@
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <!-- Custom JS -->
+  <script src="./assets/data/units.js"></script>
   <script src="./assets/js/app.js"></script>
 </body>
 
