@@ -10,6 +10,7 @@ const modalWthOpt = $("#modal-weather-search-options");
 const btnFormWthOpt = document.querySelector("#form-weather-search-options");
 
 const forecastCurrentEl = document.querySelector("#forecast-current");
+const forecast5DayEl = document.querySelector("#forecast-5day");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -139,7 +140,11 @@ const displayForecastCurrent = (place, weather) => {
 };
 
 // Update future weather forecast cards
-const displayForecast5Day = (weather) => {};
+const displayForecast5Day = (weather) => {
+  console.log(weather);
+
+  forecast5DayEl;
+};
 
 // Render list of city names
 const displayCityNames = () => {
@@ -231,6 +236,8 @@ const handleCitySearch = () => {
   if (inputCity) {
     inputCityEl.value = "";
     handleCityWeatherRequest(inputCity);
+  } else {
+    showAlert("Enter a city name to get weather", "warning");
   }
 };
 
