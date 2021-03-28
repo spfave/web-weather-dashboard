@@ -11,6 +11,7 @@ const btnFormWthOpt = document.querySelector("#form-weather-search-options");
 
 const forecastCurrentEl = document.querySelector("#forecast-current");
 const forecast5DayEl = document.querySelector("#forecast-5day");
+const forecast5DayCardsEl = document.querySelector("#forecast-5day-cards");
 
 // VARIABLES
 const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
@@ -98,16 +99,18 @@ const getWeatherData = async (latlon) => {
 
 // Update current weather forecast card
 const displayForecastCurrent = (place, weather) => {
-  const weatherCurEl = document.createElement("div");
-  weatherCurEl.classList.add("card");
-
-  const wthrIcon = weather.weather[0].icon;
   const wthrUnits = units === "imperial" ? unitName.imperial : unitName.metric;
 
-  weatherCurEl.innerHTML = `
+  // Create current weather forecast card
+  const wthrCurCard = document.createElement("div");
+  wthrCurCard.classList.add("card");
+
+  wthrCurCard.innerHTML = `
     <header class="card-header bg-info p-0 text-light">
       <div class="d-flex">
-        <img src="http://openweathermap.org/img/wn/${wthrIcon}@2x.png" alt="weather condition icon">
+        <img src="http://openweathermap.org/img/wn/${
+          weather.weather[0].icon
+        }@2x.png" alt="weather condition icon">
         <div class="d-flex flex-column justify-content-center">
           <h4>${place}</h4>
           <p>${moment().format("dddd, MMMM Do, YYYY")}</p>
@@ -134,16 +137,52 @@ const displayForecastCurrent = (place, weather) => {
         </div>
       </div>
     </div>`;
-  forecastCurrentEl.innerHTML = ``;
-  forecastCurrentEl.appendChild(weatherCurEl);
+  forecastCurrentEl.innerHTML = "";
+  forecastCurrentEl.appendChild(wthrCurCard);
   forecastCurrentEl.hidden = false;
 };
 
 // Update future weather forecast cards
 const displayForecast5Day = (weather) => {
+  const wthrUnits = units === "imperial" ? unitName.imperial : unitName.metric;
   console.log(weather);
 
-  forecast5DayEl;
+  // Loop over first five entries daily weather forecast and create weather forecast card
+  forecast5DayCardsEl.innerHTML = "";
+  for (let day = 0; day < 5; day++) {
+    const dayWthr = weather[day];
+
+    const wthrFtrCard = document.createElement("div");
+    wthrFtrCard.classList.add("card", "text-light", "bg-info");
+
+    wthrFtrCard.innerHTML = `
+      <header class="card-header p-0">
+        <img src="http://openweathermap.org/img/wn/${
+          dayWthr.weather[0].icon
+        }.png" alt="weather condition icon">
+        ${day === 0 ? "Tomorrow" : moment().add(day, "days").format("dddd")}
+      </header>
+      <div class="card-body">
+        <div class="d-table">
+          <div>
+            <p>Temperature:</p>
+            <p>${dayWthr.temp.day.toFixed(0)} &deg;${wthrUnits.temp}</p>
+          </div>
+          <div>
+            <p>Wind Speed:</p>
+            <p>${dayWthr.wind_speed.toFixed(1)} ${wthrUnits.windSpeed}</p>
+          </div>
+          <div>
+            <p>Humidity:</p>
+            <p>${dayWthr.humidity}%</p>
+          </div>
+        </div>
+      </div>`;
+
+    forecast5DayCardsEl.appendChild(wthrFtrCard);
+  }
+
+  forecast5DayEl.hidden = false;
 };
 
 // Render list of city names
