@@ -60,6 +60,10 @@ section {
   padding: 0.5rem;
 }
 
+#searched-cities .list-group-item:hover {
+  cursor: pointer;
+}
+
 /* Alert */
 .alert {
   margin: 0 20px;
