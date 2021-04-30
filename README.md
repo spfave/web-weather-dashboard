@@ -10,7 +10,7 @@ Travel Weather Dashboard provides a weather search portal for global city locati
 
 The website is created with HTML and styled using the Bootstrap front-end toolkit plus additional custom CSS. The site's theme is provided using the openly available [bootstrap theme Flatly](https://bootswatch.com/flatly/). Site functionality is implement using JavaScript and uses jQuery and Moment.js for specific functionality. Weather data is retrieved through the [Open Weather API](https://openweathermap.org/api). 
 
-Travel Weather Dashboard is built as a client-side only single page web application and dynamically displays weather data to the page provided a response is received from the API. The site uses the geocoding API and One Call API from open weather. The Geocoding API is used first given a city name to search for latitude and longitude coordinates for that city when are then used in the One Call API to retrieved weather data for the passed latitude and longitude coordinates. 
+Travel Weather Dashboard is built as a client-side only single page web application and dynamically displays weather data to the page provided a response is received from the API. The site uses the geocoding API and One Call API from open weather. The Geocoding API is used first given a city name to search for latitude and longitude coordinates for that city which are then used in the One Call API to retrieved weather data for the passed latitude and longitude coordinates. 
 
 
 &nbsp;
