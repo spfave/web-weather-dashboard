@@ -15,7 +15,7 @@ const forecast5DayEl = document.querySelector("#forecast-5day");
 const forecast5DayCardsEl = document.querySelector("#forecast-5day-cards");
 
 // VARIABLES
-const keyOpenWeather = "0bb338e53966913f3a5d9c70366f0e35";
+const keyOpenWeather = "add";
 let units;
 
 // FUNCTIONS
